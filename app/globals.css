@@ -9,6 +9,16 @@ body {
   height: 100vh;
 }
 
+.leaflet-popup-content {
+  min-width: 300px !important;
+}
+
+.leaflet-popup-close-button {
+  width: 2rem !important;
+  height: 2rem !important;
+  padding: 0.5rem !important;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;
