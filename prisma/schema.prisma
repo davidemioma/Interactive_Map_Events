@@ -1,0 +1,39 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+//npm i -D prisma
+//npx prisma init
+//npx prisma generate - Do this after creating a new model
+//npx prisma db push - to push to your database.
+//npx prisma migrate reset - to reset your databse.
+//npx prisma studio - to view your data
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model Event{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  title String
+  category String
+  description String @db.String
+  latitude Float
+  longitude Float
+  favouritesIds String[] @db.ObjectId
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  favourites UserFavourite[] @relation("favourite", fields: [favouritesIds], references: [id])
+}
+
+model UserFavourite{
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  clerkId String @unique
+  favouriteEventsIds String[] @db.ObjectId
+  favouriteEvents Event[] @relation("favourite", fields: [favouriteEventsIds], references: [id])
+}
