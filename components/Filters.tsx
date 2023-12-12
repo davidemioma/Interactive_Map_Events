@@ -64,7 +64,7 @@ const Filters = () => {
   }, [value]);
 
   return (
-    <div className="bg-[#f9f9f9] dark:bg-[#262626] h-20 flex items-center px-6 rounded-2xl border dark:border-[#363636] shadow-md">
+    <div className="bg-[#f9f9f9] dark:bg-[#262626] h-20 flex items-center px-6 rounded-2xl border dark:border-4 dark:border-[#363636] shadow-md">
       <div>
         <Combobox frameworks={categories} value={value} setValue={setValue} />
       </div>

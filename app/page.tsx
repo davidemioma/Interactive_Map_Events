@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 import Filters from "@/components/Filters";
 import { UserButton, auth } from "@clerk/nextjs";
 import FavouriteList from "@/components/FavouriteList";
+import { ThemeToggle } from "@/components/ThemeToggle";
 
 const Map = dynamic(() => import("../components/Map"), {
   ssr: false,
@@ -58,8 +59,10 @@ export default async function Home({
   return (
     <div className="w-full h-full overflow-y-auto lg:overflow-y-hidden bg-[#ededed] dark:bg-[#1e1e1e]">
       <nav className="bg-white dark:bg-[#262626] flex items-center h-12 px-6 border-b dark:border-[#363636] shadow-sm">
-        <div className="ml-auto">
+        <div className="flex items-center gap-4 ml-auto">
           <UserButton afterSignOutUrl="/" />
+
+          <ThemeToggle />
         </div>
       </nav>
 

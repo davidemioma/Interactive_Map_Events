@@ -31,7 +31,7 @@ export function Combobox({ frameworks, value, setValue }: Props) {
 
   return (
     <Popover open={open} onOpenChange={setOpen}>
-      <PopoverTrigger asChild>
+      <PopoverTrigger asChild className="dark:bg-[#363636]">
         <Button
           variant="outline"
           role="combobox"
