@@ -15,7 +15,7 @@ const FavouriteList = ({ events }: Props) => {
   const { setActiveEvent } = eventState;
 
   return (
-    <div className="w-full lg:max-w-[360px] bg-[#f9f9f9] dark:bg-[#262626] p-6 rounded-2xl border dark:border-[#363636] shadow-md">
+    <div className="w-full lg:max-w-[360px] bg-[#f9f9f9] dark:bg-[#262626] p-6 rounded-2xl border dark:border-[#363636] shadow-md overflow-y-auto">
       <div className="flex items-center gap-2 mb-6">
         <StarIcon className="w-7 h-7 text-[#fdc401]" fill="#fdc401" />
 

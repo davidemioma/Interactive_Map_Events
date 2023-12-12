@@ -1,6 +1,7 @@
 import dynamic from "next/dynamic";
 import prismadb from "@/lib/prismadb";
 import { redirect } from "next/navigation";
+import Filters from "@/components/Filters";
 import { UserButton, auth } from "@clerk/nextjs";
 import FavouriteList from "@/components/FavouriteList";
 
@@ -8,14 +9,38 @@ const Map = dynamic(() => import("../components/Map"), {
   ssr: false,
 });
 
-export default async function Home() {
+export default async function Home({
+  searchParams,
+}: {
+  searchParams: {
+    cat: string;
+  };
+}) {
   const { userId } = auth();
 
-  const events = await prismadb.event.findMany({
-    orderBy: {
-      createdAt: "desc",
-    },
-  });
+  const { cat } = searchParams;
+
+  let events;
+
+  if (cat === "all") {
+    events = await prismadb.event.findMany({
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  } else {
+    events = await prismadb.event.findMany({
+      where: {
+        category: {
+          contains: cat as string,
+          mode: "insensitive",
+        },
+      },
+      orderBy: {
+        createdAt: "desc",
+      },
+    });
+  }
 
   if (!userId) {
     return redirect("/sign-in");
@@ -40,7 +65,7 @@ export default async function Home() {
 
       <main className="w-full h-full lg:h-[calc(100%-48px)] flex flex-col lg:flex-row gap-6 p-6">
         <div className="flex flex-1 flex-col gap-6">
-          <div className="h-12">Filter</div>
+          <Filters />
 
           <Map
             events={events}
