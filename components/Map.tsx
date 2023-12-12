@@ -78,7 +78,7 @@ const Map = ({ events, favouriteEventsIds }: Props) => {
         <Popup
           //@ts-ignore
           position={activeEvent.position}
-          className="bg-[#ededed] dark:bg-[#1e1e1e] z-50 text-[#333333] dark:text-white cursor-pointer"
+          className="bg-[#ededed] z-50 text-[#333333] cursor-pointer overflow-hidden"
         >
           <div className="space-y-1.5">
             <div className="flex items-center gap-1.5">
